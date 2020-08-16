@@ -4,7 +4,7 @@ import 'dart:async';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:flutter_facebook_login/flutter_facebook_login.dart';
+// import 'package:flutter_facebook_login/flutter_facebook_login.dart';
 
 abstract class _BaseAuth {
   Future<Map<String, dynamic>> signIn({@required String email, @required String password});
@@ -125,29 +125,29 @@ class KeicyAuthentication implements _BaseAuth {
     }
   }
 
-  Future<FirebaseUser> facebookSignIn() async {
-    try {
-      final facebookLogin = FacebookLogin();
-      facebookLogin.loginBehavior = FacebookLoginBehavior.webViewOnly;
-      final result = await facebookLogin.logIn(['email']);
-      switch (result.status) {
-        case FacebookLoginStatus.loggedIn:
-          print(result.accessToken.token);
-          AuthCredential authCredential = FacebookAuthProvider.getCredential(accessToken: result.accessToken.token);
-          FirebaseUser user = (await _firebaseAuth.signInWithCredential(authCredential)).user;
-          return user;
-          break;
-        case FacebookLoginStatus.cancelledByUser:
-          print("cancel");
-          return null;
-          break;
-        case FacebookLoginStatus.error:
-          print(result.errorMessage);
-          return null;
-          break;
-      }
-    } catch (e) {
-      return null;
-    }
-  }
+  // Future<FirebaseUser> facebookSignIn() async {
+  //   try {
+  //     final facebookLogin = FacebookLogin();
+  //     facebookLogin.loginBehavior = FacebookLoginBehavior.webViewOnly;
+  //     final result = await facebookLogin.logIn(['email']);
+  //     switch (result.status) {
+  //       case FacebookLoginStatus.loggedIn:
+  //         print(result.accessToken.token);
+  //         AuthCredential authCredential = FacebookAuthProvider.getCredential(accessToken: result.accessToken.token);
+  //         FirebaseUser user = (await _firebaseAuth.signInWithCredential(authCredential)).user;
+  //         return user;
+  //         break;
+  //       case FacebookLoginStatus.cancelledByUser:
+  //         print("cancel");
+  //         return null;
+  //         break;
+  //       case FacebookLoginStatus.error:
+  //         print(result.errorMessage);
+  //         return null;
+  //         break;
+  //     }
+  //   } catch (e) {
+  //     return null;
+  //   }
+  // }
 }
